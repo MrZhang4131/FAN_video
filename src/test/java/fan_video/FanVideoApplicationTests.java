@@ -11,7 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 class FanVideoApplicationTests {
     @Autowired
     Login_Service login_service;
-    @Value(("${user.image.upload.path}"))
+    @Value(("${video.data.path}"))
     private String user_image_path;
     @Test
     void contextLoads() {

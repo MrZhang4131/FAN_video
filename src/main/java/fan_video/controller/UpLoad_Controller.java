@@ -33,4 +33,12 @@ public class UpLoad_Controller {
         return upload_service.user_load(filename);
     }
 
+    @RequestMapping("video_upload")
+    public String video_upload(@RequestPart("video_file")MultipartFile file){
+        return upload_service.video_upload(file);
+    }
+    @RequestMapping("/video_load/{filename}")
+    public ResponseEntity<Resource> load(@PathVariable String filename){
+        return upload_service.video_load(filename);
+    }
 }

@@ -20,7 +20,12 @@ public class Upload_ServiceA implements Upload_Service {
 
     @Value(("${user.image.upload.path}"))
     private String user_image_path;
+
+    @Value(("${video.data.path}"))
+    private String video_data_path;
     private Path imageDirectory = Paths.get("user_image/");
+
+    private Path videoDirectory = Paths.get("video/data/");
     @Override
     public String user_upload(MultipartFile file) {
 
@@ -66,5 +71,46 @@ public class Upload_ServiceA implements Upload_Service {
         }
     }
 
+    @Override
+    public String video_upload(MultipartFile file) {
+
+        if (file.isEmpty()) {
+            return "Please select a file to upload";
+        }
+
+        try {
+            String rootPath = System.getProperty("user.dir");//获取当前系统路径
+
+            String imageID = UUID.randomUUID().toString()+".mp4";//生成UUID确保文件名独立性
+            //保存文件
+            String savePath = rootPath + "/" + video_data_path;
+            String destinationPath = savePath + imageID;
+
+            file.transferTo(new File(destinationPath));
+
+            return imageID;
+        } catch (IOException e) {
+            e.printStackTrace();
+            return "Failed to upload file " + file.getOriginalFilename();
+        }
+    }
+    @Override
+    public ResponseEntity<Resource> video_load(String filename){
+        try {
+            Path imagePath = videoDirectory.resolve(filename).normalize();
+//            System.out.println(imagePath);
+            Resource resource = new UrlResource(imagePath.toUri());
+            if (resource.exists() || resource.isReadable()) {
+                return ResponseEntity.ok()
+//                        .header(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=\"" + resource.getFilename() + "\"")
+                        .contentType(MediaType.parseMediaType("video/mp4")) // 根据文件类型设置MediaType
+                        .body(resource);
+            } else {
+                return ResponseEntity.notFound().build();
+            }
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().build();
+        }
+    }
 
 }
