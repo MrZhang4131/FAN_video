@@ -1,0 +1,18 @@
+use fan_video;
+CREATE TABLE `users` (
+                         `userid` INT NOT NULL AUTO_INCREMENT,
+                         `userAccount` VARCHAR(255) NOT NULL,
+                         `password` VARCHAR(255) NOT NULL,
+                         `Permissions` VARCHAR(50) NOT NULL,
+                         `nickName` VARCHAR(255),
+                         `avatarUrl` VARCHAR(255),
+                         `gender` VARCHAR(10) DEFAULT 'other',
+                         `birthday` DATE,
+                         `follows_num` INT DEFAULT 0,
+                         `userDynamics_num` INT DEFAULT 0,
+                         `fans_num` INT DEFAULT 0,
+                         `collection_list` TEXT,
+                         PRIMARY KEY (`userid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+ALTER TABLE `users` MODIFY `password` VARCHAR(255);
