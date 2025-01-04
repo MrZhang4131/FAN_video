@@ -11,4 +11,8 @@ public interface Upload_Service {
     String video_upload(MultipartFile file);
 
     ResponseEntity<Resource> video_load(String filename);
+
+    String cover_upload(MultipartFile file);
+
+    ResponseEntity<Resource> cover_load(String filename);
 }
