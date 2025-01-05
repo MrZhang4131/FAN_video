@@ -1,5 +1,6 @@
 package fan_video;
 
+import fan_video.mapper.Video_Mapper;
 import fan_video.model.Users;
 import fan_video.service.Interfaces.Login_Service;
 import org.junit.jupiter.api.Test;
@@ -13,10 +14,12 @@ class FanVideoApplicationTests {
     Login_Service login_service;
     @Value(("${video.data.path}"))
     private String user_image_path;
+
+    @Autowired
+    Video_Mapper video_mapper;
     @Test
     void contextLoads() {
-        login_service.login("zs","123456","password","");
-        System.out.println(user_image_path);
+        video_mapper.test();
 
 
     }

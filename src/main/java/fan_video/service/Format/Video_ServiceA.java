@@ -23,4 +23,8 @@ public class Video_ServiceA implements Video_Service {
         ArrayList<Videos> list = video_mapper.primary_video_select(PageInit,PageNum);
         return gson.toJson(list);
     }
+    @Override
+    public void video_create(Videos videos){
+        video_mapper.video_create(videos);
+    }
 }

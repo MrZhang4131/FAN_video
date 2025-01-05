@@ -15,6 +15,10 @@ public class Videos {
     int comment_count;
     int share_count;
     boolean is_deleted;
-    String partitions;
+    String videoSection;
     String type;
+    String videoTitle;
+    String videoIntro;
+    String videoCover;
+    String videoTags;
 }
