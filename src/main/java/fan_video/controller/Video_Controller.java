@@ -1,9 +1,11 @@
 package fan_video.controller;
 
+import fan_video.Utils.JwtUtils;
 import fan_video.model.Videos;
 import fan_video.service.Interfaces.Video_Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +19,9 @@ public class Video_Controller {
     }
 
     @RequestMapping("/video/create")
-    public String video_create(Videos videos){
+    public String video_create(Videos videos,@RequestHeader("token") String token) throws Exception {
+        int id = JwtUtils.parseJit(token);
+        videos.setUser_id(id);
         videoService.video_create(videos);
         System.out.println(videos);
         return "投稿成功";

@@ -30,7 +30,7 @@ class FanVideoApplicationTests {
     private LoginCheckInterceptor loginCheckInterceptor;
     @Test
     void contextLoads() {
-        video_mapper.test();
+
 
 
     }

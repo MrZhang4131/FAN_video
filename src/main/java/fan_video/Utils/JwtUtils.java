@@ -27,12 +27,13 @@ public class JwtUtils {
         return jwt;
     }
 
-    public static void parseJit(String jwt) throws Exception{
+    public static int parseJit(String jwt) throws Exception{
         Claims claims = Jwts.parser()
                 .setSigningKey(key)
                 .parseClaimsJws(jwt)
                 .getBody();
-        System.out.println(claims);
+//        System.out.println(claims.get("ID"));
+        return (int) claims.get("ID");
     }
 
 
