@@ -3,6 +3,7 @@ package fan_video.service.Format;
 
 
 import com.google.gson.Gson;
+import fan_video.Utils.JwtUtils;
 import fan_video.mapper.User_Mapper;
 import fan_video.model.Users;
 import fan_video.service.Interfaces.Login_Service;
@@ -23,7 +24,7 @@ public class Login_ServiceA implements Login_Service {
         if(list.isEmpty()){
             return "账号或密码错误";
         }else {
-            return gson.toJson(list.get(0));
+            return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
         }
     }
 
@@ -34,9 +35,9 @@ public class Login_ServiceA implements Login_Service {
             ArrayList<Users> list = login_mapper.captcha(userAccount);
             if(list.isEmpty()){
                 login_mapper.registered(userAccount);
-                return gson.toJson(list.get(0));
+                return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
             }else{
-                return gson.toJson(list.get(0));
+                return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
             }
         }else {
             return "验证码错误";

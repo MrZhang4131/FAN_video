@@ -16,7 +16,7 @@ public class Video_Controller {
         return videoService.primaryVideo(PageSize,PageNum);
     }
 
-    @RequestMapping("/video_create")
+    @RequestMapping("/video/create")
     public String video_create(Videos videos){
         videoService.video_create(videos);
         System.out.println(videos);
