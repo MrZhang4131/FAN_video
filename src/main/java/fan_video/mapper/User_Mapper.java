@@ -15,4 +15,5 @@ public interface User_Mapper {
     public ArrayList<Users> captcha(String userAccount);
     @Insert("INSERT INTO users (userAccount, Permissions) VALUES (#{userAccount}, 'common')")
     public void registered(String userAccount);
+
 }

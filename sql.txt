@@ -1,38 +1,41 @@
-use fan_video;
-CREATE TABLE `users` (
-                         `userid` INT NOT NULL AUTO_INCREMENT,
-                         `userAccount` VARCHAR(255) NOT NULL,
-                         `password` VARCHAR(255) NOT NULL,
-                         `Permissions` VARCHAR(50) NOT NULL,
-                         `nickName` VARCHAR(255),
-                         `avatarUrl` VARCHAR(255),
-                         `gender` VARCHAR(10) DEFAULT 'other',
-                         `birthday` DATE,
-                         `follows_num` INT DEFAULT 0,
-                         `userDynamics_num` INT DEFAULT 0,
-                         `fans_num` INT DEFAULT 0,
-                         `collection_list` TEXT,
-                         PRIMARY KEY (`userid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+create table users
+(
+    userid           int auto_increment
+        primary key,
+    userAccount      varchar(255)                not null,
+    password         varchar(255)                null,
+    Permissions      varchar(50)                 not null,
+    nickName         varchar(255)                null,
+    avatarUrl        varchar(255)                null,
+    gender           varchar(10) default 'other' null,
+    birthday         date                        null,
+    follows_num      int         default 0       null,
+    userDynamics_num int         default 0       null,
+    fans_num         int         default 0       null,
+    collection_list  text                        null
+)
+    collate = utf8mb4_unicode_ci;
 
-ALTER TABLE `users` MODIFY `password` VARCHAR(255);
-
-CREATE TABLE video_info (
-                            fvid INT AUTO_INCREMENT PRIMARY KEY, -- 视频ID，自增
-                            user_id INT, -- 用户ID
-                            url VARCHAR(255), -- 视频URL
-                            view_count INT DEFAULT 0, -- 播放量，默认为0
-                            upload_time DATETIME, -- 上传时间
-                            like_count INT DEFAULT 0, -- 点赞，默认为0
-                            favorite_count INT DEFAULT 0, -- 收藏，默认为0
-                            comment_count INT DEFAULT 0, -- 评论，默认为0
-                            danmaku_count INT DEFAULT 0, -- 弹幕，默认为0
-                            share_count INT DEFAULT 0, -- 分享（待定），默认为0
-                            is_deleted BOOLEAN DEFAULT FALSE, -- 是否已删除，默认为否
-                            partitions VARCHAR(50), -- 分区
-                            type VARCHAR(50) -- 类型(图文或者视频)
+create table video_info
+(
+    fvid           int auto_increment
+        primary key,
+    user_id        int                  null,
+    url            varchar(255)         null,
+    view_count     int        default 0 null,
+    upload_time    datetime             null,
+    like_count     int        default 0 null,
+    favorite_count int        default 0 null,
+    comment_count  int        default 0 null,
+    danmaku_count  int        default 0 null,
+    share_count    int        default 0 null,
+    is_deleted     tinyint(1) default 0 null,
+    videoSection   varchar(50)          null,
+    type           varchar(50)          null,
+    videoTitle     varchar(255)         null,
+    videoIntro     text                 null,
+    videoCover     varchar(255)         null,
+    videoTags      text                 null,
+    constraint fk_user_id
+        foreign key (user_id) references users (userid)
 );
-
--- 添加外键约束
-ALTER TABLE video_info
-    ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES users(userid);

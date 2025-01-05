@@ -19,4 +19,10 @@ public interface Video_Mapper {
 
     @Select("SELECT * from users WHERE userid IN (SELECT user_id FROM video_info ORDER BY upload_time DESC LIMIT #{PageInit}, #{PageNum};)")
     public ArrayList<Users> primary_video_user_select(int PageInit, int PageNum);
+
+    @Select("SELECT * FROM video_info WHERE fvid = #{fvid}")
+    public ArrayList<Videos> openVideo(int fvid);
+
+    @Select("SELECT * FROM users WHERE userid = #{user_id}")
+    public ArrayList<Users> openVideo_User(int user_id);
 }

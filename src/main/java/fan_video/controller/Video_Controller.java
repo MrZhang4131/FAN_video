@@ -26,4 +26,9 @@ public class Video_Controller {
         System.out.println(videos);
         return "投稿成功";
     }
+
+    @RequestMapping("openVideo")
+    public String open_video(int fvid){
+        return videoService.openVideo(fvid);
+    }
 }

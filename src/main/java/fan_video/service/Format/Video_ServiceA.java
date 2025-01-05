@@ -34,4 +34,14 @@ public class Video_ServiceA implements Video_Service {
     public void video_create(Videos videos){
         video_mapper.video_create(videos);
     }
+
+    @Override
+    public String openVideo(int fvid){
+        ArrayList<Videos> video =  video_mapper.openVideo(fvid);
+        ArrayList<Users> user = video_mapper.openVideo_User(video.get(0).getUser_id());
+        Map<String, Object> result = new HashMap<>();
+        result.put("videos", video);
+        result.put("users", user);
+        return gson.toJson(result);
+    }
 }

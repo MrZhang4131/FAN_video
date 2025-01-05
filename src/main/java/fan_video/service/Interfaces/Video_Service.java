@@ -7,4 +7,6 @@ public interface Video_Service {
     String primaryVideo(int PageSize, int PageNum);
 
     void video_create(Videos videos);
+
+    String openVideo(int fvid);
 }
