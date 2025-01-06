@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 @Service
 public class Login_ServiceA implements Login_Service {
@@ -24,7 +26,10 @@ public class Login_ServiceA implements Login_Service {
         if(list.isEmpty()){
             return "账号或密码错误";
         }else {
-            return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
+            Map<String,Object> result = new HashMap<>();
+            result.put("Userinfo",list.get(0));
+            result.put("token",JwtUtils.GenJwt(list.get(0).getUserid()));
+            return gson.toJson(result);
         }
     }
 
@@ -35,9 +40,16 @@ public class Login_ServiceA implements Login_Service {
             ArrayList<Users> list = login_mapper.captcha(userAccount);
             if(list.isEmpty()){
                 login_mapper.registered(userAccount);
-                return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
+                list = login_mapper.captcha(userAccount);
+                Map<String,Object> result = new HashMap<>();
+                result.put("Userinfo",list.get(0));
+                result.put("token",JwtUtils.GenJwt(list.get(0).getUserid()));
+                return gson.toJson(result);
             }else{
-                return gson.toJson(list.get(0))+JwtUtils.GenJwt(list.get(0).getUserid());
+                Map<String,Object> result = new HashMap<>();
+                result.put("Userinfo",list.get(0));
+                result.put("token",JwtUtils.GenJwt(list.get(0).getUserid()));
+                return gson.toJson(result);
             }
         }else {
             return "验证码错误";

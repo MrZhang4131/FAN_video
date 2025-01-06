@@ -5,7 +5,6 @@ import fan_video.Utils.JwtUtils;
 import fan_video.mapper.Comment_Mapper;
 import fan_video.model.Comments;
 import fan_video.service.Interfaces.Comment_Service;
-import org.apache.ibatis.annotations.Mapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -50,6 +49,22 @@ public class Comment_ServiceA implements Comment_Service {
         result.put("comment_list",list);
         result.put("Page_total_size",Page_total_size);
         result.put("comment_total_num",comment_total_num);
+        return gson.toJson(result);
+    }
+
+    @Override
+    public String commentSecond(int comment_id, int PageSize, int PageNum){
+        int PageInit = (PageNum-1)*PageSize;
+        ArrayList<Comments> list = comment_mapper.commentSecond(comment_id,PageInit,PageNum);
+        int comment_second_total_num = comment_mapper.commentSecondNum(comment_id);
+        int Page_total_size = comment_second_total_num/PageSize;
+        if(comment_second_total_num%PageSize!=0){
+            Page_total_size+=1;
+        }
+        Map<String, Object> result = new HashMap<>();
+        result.put("comment_second_list",list);
+        result.put("Page_total_size",Page_total_size);
+        result.put("comment_second_total_num",comment_second_total_num);
         return gson.toJson(result);
     }
 }

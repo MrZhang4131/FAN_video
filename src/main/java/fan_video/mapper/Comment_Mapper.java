@@ -23,7 +23,18 @@ public interface Comment_Mapper {
     public ArrayList<Comments> commentFirst(int fvid,int PageInit,int PageNum);
 
     @Select("Select Count(*) from comments where video_id=#{fvid}")
-    public int commentNum(int fvid);
+    public int commentNum(int fvid);//可能需要一个单独一级评论的计数
 
     //2025.1.6以上SQL均测试完毕
+
+    @Select("Select Count(*) from comments where video_id=#{fvid} AND comment_id IS NULL")
+    public int commentFirstNum(int fvid);//获得一级评论的计数
+
+    @Select("Select * from comments WHERE comment_id = #{comment_list} ORDER BY time DESC LIMIT #{PageInit},#{PageNum}")
+    public ArrayList<Comments> commentSecond(int comment_list,int PageInit,int PageNum);
+
+    @Select("Select Count(*) from comments where comment_id = #{comment_id}")
+    public int commentSecondNum(int comment_id);
+
+
 }

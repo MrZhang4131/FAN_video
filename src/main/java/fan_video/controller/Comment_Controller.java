@@ -23,10 +23,10 @@ public class Comment_Controller {
         return comment_service.commentFirst(fvid,PageSize,PageNum);
     }
 
-//    @RequestMapping("/comment/second")
-//    public String comment_second(){
-//
-//    }
+    @RequestMapping("/comment/second")
+    public String comment_second(int comment_id,int PageSize,int PageNum){
+        return comment_service.commentSecond(comment_id,PageSize,PageNum);
+    }
 
 
     @RequestMapping("/insertComment")
