@@ -22,7 +22,7 @@ public class Video_ServiceA implements Video_Service {
 
     @Override
     public String primaryVideo(int PageSize, int PageNum) {
-        int PageInit = (PageSize-1)*PageNum;
+        int PageInit = (PageNum-1)*PageSize;
         ArrayList<Videos> video_list = video_mapper.primary_video_select(PageInit,PageNum);
         ArrayList<Users> user_list = video_mapper.primary_video_user_select(PageInit,PageNum);
         Map<String, Object> result = new HashMap<>();

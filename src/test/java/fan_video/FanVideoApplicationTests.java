@@ -1,6 +1,7 @@
 package fan_video;
 
 import fan_video.Interceptor.LoginCheckInterceptor;
+import fan_video.mapper.Comment_Mapper;
 import fan_video.mapper.Video_Mapper;
 import fan_video.model.Users;
 import fan_video.service.Interfaces.Login_Service;
@@ -25,6 +26,8 @@ class FanVideoApplicationTests {
 
     @Autowired
     Video_Mapper video_mapper;
+    @Autowired
+    Comment_Mapper comment_mapper;
 
     @Autowired
     private LoginCheckInterceptor loginCheckInterceptor;
