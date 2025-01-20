@@ -9,4 +9,8 @@ public interface Video_Service {
     void video_create(Videos videos);
 
     String openVideo(int fvid);
+
+    void delete_video(int fvid);
+
+    String videoSection_select(String videoSection);
 }

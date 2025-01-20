@@ -64,4 +64,10 @@ public class Login_ServiceA implements Login_Service {
             return login_captcha(userAccount,Password,userAccount);
         }
     }
+
+    @Override
+    public String get_userinfo(int userid){
+        ArrayList<Users> list = login_mapper.get_userinfo(userid);
+        return gson.toJson(list);
+    }
 }

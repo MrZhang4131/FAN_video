@@ -20,7 +20,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         String jwt = request.getHeader("token");
 
         if(!StringUtils.hasLength(jwt)){
-            String error = "未登录";
+            String error = "no token";
             response.getWriter().write(error);
             return false;
         }
@@ -28,6 +28,7 @@ public class LoginCheckInterceptor implements HandlerInterceptor {
         try {
             JwtUtils.parseJit(jwt);
         }catch (Exception e){
+            response.getWriter().write("token is error");
             return false;
         }
         return true;

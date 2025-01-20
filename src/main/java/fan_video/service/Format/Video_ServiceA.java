@@ -24,10 +24,13 @@ public class Video_ServiceA implements Video_Service {
     public String primaryVideo(int PageSize, int PageNum) {
         int PageInit = (PageNum-1)*PageSize;
         ArrayList<Videos> video_list = video_mapper.primary_video_select(PageInit,PageNum);
-        ArrayList<Users> user_list = video_mapper.primary_video_user_select(PageInit,PageNum);
-        Map<String, Object> result = new HashMap<>();
-        result.put("videos", video_list);
-        result.put("users", user_list);
+        ArrayList<Users> user = new ArrayList<Users>();
+        for (Videos videos : video_list) {
+            user.addAll(video_mapper.get_userinfo(videos.getUser_id()));
+        }
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("videos",video_list);
+        result.put("users",user);
         return gson.toJson(result);
     }
     @Override
@@ -38,10 +41,31 @@ public class Video_ServiceA implements Video_Service {
     @Override
     public String openVideo(int fvid){
         ArrayList<Videos> video =  video_mapper.openVideo(fvid);
-        ArrayList<Users> user = video_mapper.openVideo_User(video.get(0).getUser_id());
+        ArrayList<Users> user = video_mapper.get_userinfo(video.get(0).getUser_id());
         Map<String, Object> result = new HashMap<>();
         result.put("videos", video);
         result.put("users", user);
         return gson.toJson(result);
     }
+
+    @Override
+    public void delete_video(int fvid){
+        video_mapper.delete_video(fvid);
+    }
+
+    @Override
+    public String videoSection_select(String videoSection){
+        ArrayList<Videos> video = video_mapper.videoSection_select(videoSection);
+        ArrayList<Users> user = new ArrayList<Users>();
+        for (Videos videos : video) {
+            user.addAll(video_mapper.get_userinfo(videos.getUser_id()));
+        }
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("videos",video);
+        result.put("users",user);
+        return gson.toJson(result);
+    }
+
+
+
 }

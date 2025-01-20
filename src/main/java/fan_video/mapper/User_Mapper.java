@@ -16,4 +16,6 @@ public interface User_Mapper {
     @Insert("INSERT INTO users (userAccount, Permissions) VALUES (#{userAccount}, 'common')")
     public void registered(String userAccount);
 
+    @Select("SELECT * FROM users WHERE userid = #{userid}")
+    public ArrayList<Users> get_userinfo(int userid);
 }

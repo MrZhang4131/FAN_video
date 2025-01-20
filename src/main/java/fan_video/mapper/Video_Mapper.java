@@ -2,9 +2,7 @@ package fan_video.mapper;
 
 import fan_video.model.Users;
 import fan_video.model.Videos;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 
 import java.util.ArrayList;
 
@@ -17,12 +15,20 @@ public interface Video_Mapper {
             "values(#{url},#{videoCover},#{videoTitle},#{videoIntro},#{videoTags},#{videoSection},NOW(),#{user_id},#{type})")
     public void video_create(Videos videos);
 
-    @Select("SELECT * from users WHERE userid IN (SELECT user_id FROM video_info ORDER BY upload_time DESC LIMIT #{PageInit}, #{PageNum};)")
-    public ArrayList<Users> primary_video_user_select(int PageInit, int PageNum);
+    //采用循环查询重构
+//    @Select("SELECT * from users WHERE userid IN (SELECT user_id FROM video_info ORDER BY upload_time DESC LIMIT #{PageInit}, #{PageNum};)")
+//    public ArrayList<Users> primary_video_user_select(int PageInit, int PageNum);
 
     @Select("SELECT * FROM video_info WHERE fvid = #{fvid}")
     public ArrayList<Videos> openVideo(int fvid);
 
-    @Select("SELECT * FROM users WHERE userid = #{user_id}")
-    public ArrayList<Users> openVideo_User(int user_id);
+
+    @Update("UPDATE video_info SET is_deleted = true WHERE fvid = #{fvid};")
+    public void delete_video(int fvid);
+
+    @Select("SELECT * FROM video_info WHERE videoSection = #{videoSection}")
+    public ArrayList<Videos> videoSection_select(String videoSection);
+
+    @Select("SELECT * FROM users WHERE userid = #{userid}")
+    public ArrayList<Users> get_userinfo(int userid);
 }

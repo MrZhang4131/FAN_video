@@ -31,4 +31,14 @@ public class Video_Controller {
     public String open_video(int fvid){
         return videoService.openVideo(fvid);
     }
+    @RequestMapping("/video/delete")
+    public String delete_video(int fvid){
+        videoService.delete_video(fvid);
+        return "删除成功";
+    }
+    //分区查询视频
+    @RequestMapping("videoSection_select")
+    public String videoSection(String section){
+        return videoService.videoSection_select(section);
+    }
 }

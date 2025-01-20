@@ -18,4 +18,9 @@ public class Login_Controller
         return login_service.login(userAccount,Password,loginType,permissionType);
     }
 
+    @RequestMapping("/get_userinfo")
+    public String get_userinfo(int userid){
+        return login_service.get_userinfo(userid);
+    }
+
 }

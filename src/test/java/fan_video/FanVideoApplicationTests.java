@@ -4,7 +4,9 @@ import fan_video.Interceptor.LoginCheckInterceptor;
 import fan_video.mapper.Comment_Mapper;
 import fan_video.mapper.Video_Mapper;
 import fan_video.model.Users;
+import fan_video.model.Videos;
 import fan_video.service.Interfaces.Login_Service;
+import fan_video.service.Interfaces.Video_Service;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -13,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -30,12 +33,14 @@ class FanVideoApplicationTests {
     Comment_Mapper comment_mapper;
 
     @Autowired
+    Video_Service videoService;
+    @Autowired
     private LoginCheckInterceptor loginCheckInterceptor;
     @Test
     void contextLoads() {
-
-
-
+        System.out.println(videoService.primaryVideo(1,5));
+        String loginServiceUserinfo = login_service.get_userinfo(1);
+        System.out.println(loginServiceUserinfo);
     }
     @Test
     void GENJwt(){
