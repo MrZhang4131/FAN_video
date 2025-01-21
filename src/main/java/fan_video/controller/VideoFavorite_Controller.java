@@ -32,7 +32,7 @@ public class VideoFavorite_Controller {
         return videoFavorite_service.videoFavorite_Num(fvid);
     }
 
-    @RequestMapping("videoFavorite/category/#{category}")
+    @RequestMapping("videoFavorite/category/{category}")
     public String videoFavorite_category(@PathVariable String category,@RequestHeader("token") String token) throws Exception {
         int user_id = JwtUtils.parseJit(token);
         return videoFavorite_service.favorite_video(user_id,category);
