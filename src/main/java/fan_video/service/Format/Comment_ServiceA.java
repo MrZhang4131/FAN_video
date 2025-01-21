@@ -4,6 +4,8 @@ import com.google.gson.Gson;
 import fan_video.Utils.JwtUtils;
 import fan_video.mapper.CommentLike_Mapper;
 import fan_video.mapper.Comment_Mapper;
+import fan_video.mapper.VideoLike_Mapper;
+import fan_video.mapper.Video_Mapper;
 import fan_video.model.Comments;
 import fan_video.service.Interfaces.Comment_Service;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +22,9 @@ public class Comment_ServiceA implements Comment_Service {
     @Autowired
     private Comment_Mapper comment_mapper;
 
+    @Autowired
+    private VideoLike_Mapper videoLike_mapper;
+
     @Override
     public void insertComment(Comments comments, String token) throws Exception {
         int user_id = JwtUtils.parseJit(token);
@@ -28,6 +33,7 @@ public class Comment_ServiceA implements Comment_Service {
             comment_mapper.insertComment_comment(comments);
         }else{
             comment_mapper.insertVideo_comment(comments);
+            videoLike_mapper.update_videoComment_count(comments.getVideo_id());
         }
     }
 

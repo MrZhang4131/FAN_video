@@ -6,7 +6,7 @@ import java.util.ArrayList;
 
 @Mapper
 public interface CommentLike_Mapper {
-    @Insert("INSERT INTO comment_likes (comment_id, user_id) VALUES (#{comment_Id}, #{user_id})")
+    @Insert("INSERT INTO comment_likes (comment_id, user_id) VALUES (#{comment_id}, #{user_id})")
     public void add_commentLike(int comment_id,int user_id);
 
     @Update("Update comments Set likeNum = (Select Count(*) From comment_likes Where comment_id = #{comment_id})")
