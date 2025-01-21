@@ -11,4 +11,5 @@ public class Comments {
     int comment_id;
     Date time;
     String comment_content;
+    int likeNum;
 }
