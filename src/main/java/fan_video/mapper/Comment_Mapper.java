@@ -30,8 +30,8 @@ public interface Comment_Mapper {
     @Select("Select Count(*) from comments where video_id=#{fvid} AND comment_id IS NULL")
     public int commentFirstNum(int fvid);//获得一级评论的计数
 
-    @Select("Select * from comments WHERE comment_id = #{comment_list} ORDER BY time DESC LIMIT #{PageInit},#{PageNum}")
-    public ArrayList<Comments> commentSecond(int comment_list,int PageInit,int PageNum);
+    @Select("Select * from comments WHERE comment_id = #{comment_list} ORDER BY time DESC LIMIT #{PageInit},#{PageSize}")
+    public ArrayList<Comments> commentSecond(int comment_list,int PageInit,int PageSize);
 
     @Select("Select Count(*) from comments where comment_id = #{comment_id}")
     public int commentSecondNum(int comment_id);
