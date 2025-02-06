@@ -14,6 +14,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -31,6 +32,9 @@ class FanVideoApplicationTests {
     Video_Mapper video_mapper;
     @Autowired
     Comment_Mapper comment_mapper;
+
+    @Autowired
+    private RedisTemplate<String,Object> redisTemplate;
 
     @Autowired
     Video_Service videoService;
@@ -68,6 +72,17 @@ class FanVideoApplicationTests {
         System.out.println(
                 videoService.primaryVideo(20,1)
         );
+    }
+
+    @Test
+    void redisTest(){
+        // 设置键值对
+        redisTemplate.opsForValue().set("key", "value");
+
+    // 获取值
+        String value = (String) redisTemplate.opsForValue().get("key");
+        System.out.println(value);
+
     }
 
 }

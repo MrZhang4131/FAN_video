@@ -47,7 +47,7 @@ public class Comment_ServiceA implements Comment_Service {
     @Override
     public String commentFirst(int fvid, int PageSize, int PageNum){
         int PageInit = (PageNum-1)*PageSize;
-        ArrayList<Comments> list = comment_mapper.commentFirst(fvid,PageInit,PageNum);
+        ArrayList<Comments> list = comment_mapper.commentFirst(fvid,PageInit,PageSize);
         int comment_total_num = comment_mapper.commentNum(fvid);
         int Page_total_size = comment_total_num/PageSize;
         if(comment_total_num%PageSize!=0){

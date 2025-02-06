@@ -20,7 +20,7 @@ public interface Comment_Mapper {
     public void insertComment_comment(Comments comments);
 
     @Select("Select * from comments where video_id = #{fvid} AND comment_id IS NULL ORDER BY time DESC LIMIT #{PageInit}, #{PageNum};")
-    public ArrayList<Comments> commentFirst(int fvid,int PageInit,int PageNum);
+    public ArrayList<Comments> commentFirst(int fvid,int PageInit,int PageSize);
 
     @Select("Select Count(*) from comments where video_id=#{fvid}")
     public int commentNum(int fvid);//可能需要一个单独一级评论的计数
