@@ -23,7 +23,7 @@ public class Video_ServiceA implements Video_Service {
     @Override
     public String primaryVideo(int PageSize, int PageNum) {
         int PageInit = (PageNum-1)*PageSize;
-        ArrayList<Videos> video_list = video_mapper.primary_video_select(PageInit,PageNum);
+        ArrayList<Videos> video_list = video_mapper.primary_video_select(PageInit,PageSize);
         ArrayList<Users> user = new ArrayList<Users>();
         for (Videos videos : video_list) {
             user.addAll(video_mapper.get_userinfo(videos.getUser_id()));

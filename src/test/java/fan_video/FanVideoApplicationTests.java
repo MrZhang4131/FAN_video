@@ -63,5 +63,11 @@ class FanVideoApplicationTests {
                 .getBody();
         System.out.println(claims);
     }
+    @Test
+    void primary_video_test(){
+        System.out.println(
+                videoService.primaryVideo(20,1)
+        );
+    }
 
 }
