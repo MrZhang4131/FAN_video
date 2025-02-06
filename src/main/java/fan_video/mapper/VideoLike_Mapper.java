@@ -7,7 +7,7 @@ public interface VideoLike_Mapper {
     @Update("Update video_info Set like_count = (Select Count(*) from video_likes where fvid = #{fvid})")
     public void update_videoLike_num(int fvid);
 
-    @Update("Update video_info Set comment_count = (Select Count(*) from comment where video_id = #{fvid})")
+    @Update("Update video_info Set comment_count = (Select Count(*) from comments where video_id = #{fvid})")
     public void update_videoComment_count(int fvid);
 
 //    @Update("Update video_info Set comment_count = (Select Count(*) from comment where video_id = #{fvid})")
