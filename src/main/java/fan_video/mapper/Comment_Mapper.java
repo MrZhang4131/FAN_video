@@ -19,7 +19,7 @@ public interface Comment_Mapper {
     @Insert("Insert Into comments (user_id, video_id, comment_id, time, comment_content) values(#{user_id},#{video_id},#{comment_id},NOW(),#{comment_content})")
     public void insertComment_comment(Comments comments);
 
-    @Select("Select * from comments where video_id = #{fvid} AND comment_id IS NULL ORDER BY time DESC LIMIT #{PageInit}, #{PageNum};")
+    @Select("Select * from comments where video_id = #{fvid} AND comment_id IS NULL ORDER BY time DESC LIMIT #{PageInit}, #{PageSize};")
     public ArrayList<Comments> commentFirst(int fvid,int PageInit,int PageSize);
 
     @Select("Select Count(*) from comments where video_id=#{fvid}")
