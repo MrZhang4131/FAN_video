@@ -23,4 +23,10 @@ public interface VideoFavorites_Mapper {
 
     @Select("Select * from video_info where fvid in (Select fvid from video_favorite where user_id = #{user_id} AND category = #{category})")
     public ArrayList<Videos> favorite_video(int user_id,String category);
+
+    @Select("Select collection_list from users where userid = #{user_Id}")
+    public String videoFavorite_categoryList(int user_id);
+
+    @Update("Update users Set collection_list = #{collection_list} where userid = #{user_id}")
+    public void change_category(String collection_list,int user_id);
 }

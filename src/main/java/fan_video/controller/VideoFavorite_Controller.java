@@ -38,4 +38,19 @@ public class VideoFavorite_Controller {
         return videoFavorite_service.favorite_video(user_id,category);
     }
 
+    @RequestMapping("videoFavorite/categoryList")
+    public String videoFavorite_categoryList(@RequestHeader("token") String token) throws Exception {
+        return videoFavorite_service.videoFavorite_categoryList(token);
+    }
+
+    @RequestMapping("videoFavorite/add_category")
+    public String add_category(String category,@RequestHeader("token") String token) throws Exception {
+        return videoFavorite_service.add_category(category,token);
+    }
+
+    @RequestMapping("videoFavorite/delete_category")
+    public String delete_category(String category,@RequestHeader("token") String token) throws Exception {
+        return videoFavorite_service.delete_category(category,token);
+    }
+
 }
