@@ -1,6 +1,7 @@
 package fan_video.service.Format;
 
 import com.google.gson.Gson;
+import fan_video.Utils.JwtUtils;
 import fan_video.mapper.Video_Mapper;
 import fan_video.model.Users;
 import fan_video.model.Videos;
@@ -57,6 +58,20 @@ public class Video_ServiceA implements Video_Service {
     public String videoSection_select(String videoSection){
         ArrayList<Videos> video = video_mapper.videoSection_select(videoSection);
         ArrayList<Users> user = new ArrayList<Users>();
+        for (Videos videos : video) {
+            user.addAll(video_mapper.get_userinfo(videos.getUser_id()));
+        }
+        HashMap<String,Object> result = new HashMap<>();
+        result.put("videos",video);
+        result.put("users",user);
+        return gson.toJson(result);
+    }
+
+    @Override
+    public String video_user(String token) throws Exception {
+        int user_id = JwtUtils.parseJit(token);
+        ArrayList<Videos> video = video_mapper.video_user(user_id);
+        ArrayList<Users> user = new ArrayList<>();
         for (Videos videos : video) {
             user.addAll(video_mapper.get_userinfo(videos.getUser_id()));
         }

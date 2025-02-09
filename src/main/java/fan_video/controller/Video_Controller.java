@@ -41,4 +41,9 @@ public class Video_Controller {
     public String videoSection(String section){
         return videoService.videoSection_select(section);
     }
+
+    @RequestMapping("/video/user")
+    public String video_user(@RequestHeader("token") String token) throws Exception {
+        return videoService.video_user(token);
+    }
 }

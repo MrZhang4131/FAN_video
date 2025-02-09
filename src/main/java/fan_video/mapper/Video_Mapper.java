@@ -31,4 +31,7 @@ public interface Video_Mapper {
 
     @Select("SELECT * FROM users WHERE userid = #{userid}")
     public ArrayList<Users> get_userinfo(int userid);
+
+    @Select("Select * From video_info where user_id = #{user_id}")
+    public ArrayList<Videos> video_user(int user_id);
 }

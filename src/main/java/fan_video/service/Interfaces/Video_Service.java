@@ -13,4 +13,6 @@ public interface Video_Service {
     void delete_video(int fvid);
 
     String videoSection_select(String videoSection);
+
+    String video_user(String token) throws Exception;
 }
