@@ -14,5 +14,5 @@ public interface Video_Service {
 
     String videoSection_select(String videoSection);
 
-    String video_user(String token) throws Exception;
+    String video_user(int user_id) throws Exception;
 }

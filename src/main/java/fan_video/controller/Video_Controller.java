@@ -44,6 +44,12 @@ public class Video_Controller {
 
     @RequestMapping("/video/user")
     public String video_user(@RequestHeader("token") String token) throws Exception {
-        return videoService.video_user(token);
+        int user_id = JwtUtils.parseJit(token);
+        return videoService.video_user(user_id);
+    }
+
+    @RequestMapping("/video/other")
+    public String video_other(int user_id) throws Exception {
+        return videoService.video_user(user_id);
     }
 }

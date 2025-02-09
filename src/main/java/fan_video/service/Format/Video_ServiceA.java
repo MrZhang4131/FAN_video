@@ -1,7 +1,6 @@
 package fan_video.service.Format;
 
 import com.google.gson.Gson;
-import fan_video.Utils.JwtUtils;
 import fan_video.mapper.Video_Mapper;
 import fan_video.model.Users;
 import fan_video.model.Videos;
@@ -68,8 +67,7 @@ public class Video_ServiceA implements Video_Service {
     }
 
     @Override
-    public String video_user(String token) throws Exception {
-        int user_id = JwtUtils.parseJit(token);
+    public String video_user(int user_id) throws Exception {
         ArrayList<Videos> video = video_mapper.video_user(user_id);
         ArrayList<Users> user = new ArrayList<>();
         for (Videos videos : video) {
